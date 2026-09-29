@@ -1,7 +1,7 @@
 (function(){
 "use strict";
 const D=window.VF7_DATA||{questions:[],library:[],saints:{},exam:[]};
-const $=id=>document.getElementById(id);
+const $=id=>document.getElementById(id);\nconst modalEl=$("modalEl"), modalTitleEl=$("modalTitleEl"), modalBodyEl=$("modalBodyEl");
 const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
 const norm=s=>String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
 const pad=n=>String(n).padStart(2,"0");
@@ -105,11 +105,11 @@ function relatedDay(q){
   return best;
 }
 function openQuestion(i){
-  const q=D.questions[i];modalTitle.textContent=q.q;
-  modalBody.innerHTML='<p>'+esc(q.a)+'</p><div class="noteBox"><strong>Repères</strong><br>📚 CEC '+esc(q.cec)+'<br>📖 '+esc(q.bible)+'</div><div class="vf-actions"><a class="btn secondary" target="_blank" rel="noopener" href="'+esc(bibleUrl(q.bible))+'">Bible AELF ↗</a><a class="btn secondary" target="_blank" rel="noopener" href="'+CEC_URL+'">Catéchisme ↗</a><button class="btn secondary" id="vfQMark">'+(hasMark("question",i)?"★ Retirer":"☆ Marquer")+'</button></div>';
-  const rd=relatedDay(q);if(rd>=0){const b=document.createElement("button");b.className="btn soft";b.textContent="Voir dans le parcours";b.onclick=()=>{modal.classList.remove("show");current=rd;renderDay();gotoPage("today");};modalBody.querySelector(".vf-actions").appendChild(b);}
+  const q=D.questions[i];modalTitleEl.textContent=q.q;
+  modalBodyEl.innerHTML='<p>'+esc(q.a)+'</p><div class="noteBox"><strong>Repères</strong><br>📚 CEC '+esc(q.cec)+'<br>📖 '+esc(q.bible)+'</div><div class="vf-actions"><a class="btn secondary" target="_blank" rel="noopener" href="'+esc(bibleUrl(q.bible))+'">Bible AELF ↗</a><a class="btn secondary" target="_blank" rel="noopener" href="'+CEC_URL+'">Catéchisme ↗</a><button class="btn secondary" id="vfQMark">'+(hasMark("question",i)?"★ Retirer":"☆ Marquer")+'</button></div>';
+  const rd=relatedDay(q);if(rd>=0){const b=document.createElement("button");b.className="btn soft";b.textContent="Voir dans le parcours";b.onclick=()=>{modalEl.classList.remove("show");current=rd;renderDay();gotoPage("today");};modalBodyEl.querySelector(".vf-actions").appendChild(b);}
   $("vfQMark").onclick=()=>{toggleMark("question",i,q.q,"CEC "+q.cec,String(i));openQuestion(i);};
-  modal.classList.add("show");
+  modalEl.classList.add("show");
 }
 function renderQuestions(filter=""){
   const box=$("vfExploreContent");box.innerHTML='<div><h3>Questions de foi</h3><p class="small">Réponses courtes avec références au Catéchisme et à la Bible.</p><input id="vfQuestionSearch" class="search" placeholder="Poser un mot-clé ou une question…"><div id="vfQuestionList"></div></div>';
@@ -255,11 +255,11 @@ $("vfJDate").onchange=e=>loadJ(e.target.value);$("vfJSave").onclick=saveJ;$("vfJ
 
 /* Examen de conscience non persistant */
 $("vfExam").onclick=()=>{
-  modalTitle.textContent="Examen de conscience";
+  modalTitleEl.textContent="Examen de conscience";
   let last="",html='<p class="small">Prends d’abord un moment de silence. Ces cases servent seulement à ta relecture actuelle et ne sont pas enregistrées.</p>';
   D.exam.forEach((x,i)=>{if(x.cat!==last){last=x.cat;html+='<div class="vf-exam-cat">'+esc(last)+'</div>';}html+='<label class="vf-exam-item"><input type="checkbox"><span>'+esc(x.q)+'</span></label>';});
   html+='<div class="noteBox small">Un examen de conscience n’a pas pour but de produire de l’angoisse, mais de regarder sa vie dans la vérité, la responsabilité et la confiance en la miséricorde de Dieu.</div><div class="vf-actions"><button class="btn secondary" id="vfExamReset">Tout décocher</button><a class="btn secondary" target="_blank" rel="noopener" href="'+CEC_URL+'">Consulter le CEC ↗</a></div>';
-  modalBody.innerHTML=html;$("vfExamReset").onclick=()=>modalBody.querySelectorAll('input[type="checkbox"]').forEach(x=>x.checked=false);modal.classList.add("show");
+  modalBodyEl.innerHTML=html;$("vfExamReset").onclick=()=>modalBodyEl.querySelectorAll('input[type="checkbox"]').forEach(x=>x.checked=false);modalEl.classList.add("show");
 };
 
 /* Print / PDF via browser */
