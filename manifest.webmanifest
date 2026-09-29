@@ -1,7 +1,7 @@
 {
   "name": "Via Fidei — Prière & Foi",
   "short_name": "Via Fidei",
-  "description": "Prière quotidienne et parcours catholique de découverte de la foi.",
+  "description": "Prière quotidienne et parcours catholique, avec prières en français et en latin.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
