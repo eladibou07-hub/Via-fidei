@@ -1,7 +1,7 @@
-const CACHE = 'via-fidei-5c7f31be552c48e3';
+const CACHE = 'via-fidei-saints-v8-1';
 const ASSETS = ['./', './index.html', './manifest.webmanifest', './icon.svg',
   './icons/icon-192.png', './icons/icon-512.png', './icons/apple-touch-icon.png',
-  './icons/maskable-512.png', './bilingual.js', './sources.js', './faith-data.js', './v7.js', './pwa.js'];
+  './icons/maskable-512.png', './bilingual.js', './sources.js', './faith-data.js', './v7.js', './saints-data.js', './saints-v8.js', './pwa.js'];
 const urls = ASSETS.map(path => new URL(path, self.registration.scope).href);
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache =>
