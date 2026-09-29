@@ -1,0 +1,14 @@
+{
+  "name": "Via Fidei — Prière & Foi",
+  "short_name": "Via Fidei",
+  "description": "Prière quotidienne et parcours catholique de découverte de la foi.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f6f1e8",
+  "theme_color": "#755a34",
+  "icons": [
+    {"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
+  ]
+}
