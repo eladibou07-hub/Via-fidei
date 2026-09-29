@@ -73,7 +73,7 @@ function renderTodaySaint(){
     card.className="card vfs-hero";card.innerHTML='<div class="kicker">Saints & fêtes</div><h2>Aucune notice locale aujourd’hui</h2><p class="small">Le calendrier AELF reste la référence pour la célébration liturgique exacte du jour.</p>'+(next?'<div class="vfs-card"><span class="small">Prochaine notice</span><h3>'+esc(dateLabel(next.key))+' · '+esc(next.name)+'</h3><button class="btn secondary" id="vfsNext">Découvrir</button></div>':'')+'<div class="vf-actions"><button class="btn secondary" id="vfsAll">Tous les saints</button><a class="btn secondary" target="_blank" rel="noopener" href="'+aelfFor(key)+'">Liturgie AELF ↗</a></div>';
     if(next)$("vfsNext").onclick=()=>openSaint(next.id);
   }
-  $("vfsAll").onclick=()=>{document.querySelector('[data-vftab="saints"]').click();document.querySelector('[data-page="explore"]').click();};
+  $("vfsAll").onclick=()=>{document.querySelector('[data-page="explore"]').click();document.querySelector('[data-vftab="saints"]').click();};
 }
 
 function addSaintsTab(){
