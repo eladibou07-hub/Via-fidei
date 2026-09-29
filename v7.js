@@ -1,7 +1,8 @@
 (function(){
 "use strict";
 const D=window.VF7_DATA||{questions:[],library:[],saints:{},exam:[]};
-const $=id=>document.getElementById(id);\nconst modalEl=$("modalEl"), modalTitleEl=$("modalTitleEl"), modalBodyEl=$("modalBodyEl");
+const $=id=>document.getElementById(id);
+const modalEl=$("modal"), modalTitleEl=$("modalTitle"), modalBodyEl=$("modalBody");
 const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
 const norm=s=>String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
 const pad=n=>String(n).padStart(2,"0");
