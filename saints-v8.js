@@ -35,7 +35,7 @@ function dateLabel(key){
   return new Intl.DateTimeFormat("fr-FR",{day:"numeric",month:"long"}).format(new Date(2026,m-1,d));
 }
 function entryMatches(s){
-  if(+s.key.slice(0,2)!==saintMonth)return false;
+  if(!saintQuery && saintFilter!=="Favoris" && saintMonth && +s.key.slice(0,2)!==saintMonth)return false;
   if(saintQuery && !norm(s.name+" "+s.kind+" "+s.bio+" "+s.focus).includes(norm(saintQuery)))return false;
   if(saintFilter==="Tous")return true;
   if(saintFilter==="Favoris")return isFav(s.id);
@@ -94,7 +94,9 @@ function renderSaints(){
    '<div class="vfs-toolbar" id="vfsFilters"></div>'+
    '<div class="vfs-count" id="vfsCount"></div><div class="vfs-grid" id="vfsGrid"></div>';
   $("vfsSearch").value=saintQuery;$("vfsSearch").oninput=e=>{saintQuery=e.target.value;drawSaintGrid();};
-  const months=$("vfsMonths");MONTHS.forEach((m,i)=>{const c=document.createElement("button");c.className="vfs-chip"+(saintMonth===i+1?" active":"");c.textContent=m;c.onclick=()=>{saintMonth=i+1;renderSaints();};months.appendChild(c);});
+  const months=$("vfsMonths");
+  const all=document.createElement("button");all.className="vfs-chip"+(saintMonth===0?" active":"");all.textContent="Toute l’année";all.onclick=()=>{saintMonth=0;renderSaints();};months.appendChild(all);
+  MONTHS.forEach((m,i)=>{const c=document.createElement("button");c.className="vfs-chip"+(saintMonth===i+1?" active":"");c.textContent=m;c.onclick=()=>{saintMonth=i+1;renderSaints();};months.appendChild(c);});
   ["Tous","Favoris","Martyr","Docteur","Apôtre","Marie","Prêtre","Évêque","Religieuse"].forEach(f=>{const c=document.createElement("button");c.className="vfs-chip"+(saintFilter===f?" active":"");c.textContent=f;c.onclick=()=>{saintFilter=f;drawSaintGrid();document.querySelectorAll("#vfsFilters .vfs-chip").forEach(x=>x.classList.toggle("active",x===c));};$("vfsFilters").appendChild(c);});
   $("vfsRandom").onclick=()=>{if(!SAINTS.length)return;openSaint(SAINTS[Math.floor(Math.random()*SAINTS.length)].id);};
   drawSaintGrid();
